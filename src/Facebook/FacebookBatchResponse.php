@@ -116,7 +116,7 @@ class FacebookBatchResponse extends FacebookResponse implements IteratorAggregat
     /**
      * @inheritdoc
      */
-    public function getIterator()
+    public function getIterator(): ArrayIterator
     {
         return new ArrayIterator($this->responses);
     }
@@ -132,7 +132,7 @@ class FacebookBatchResponse extends FacebookResponse implements IteratorAggregat
     /**
      * @inheritdoc
      */
-    public function offsetExists($offset)
+    public function offsetExists(mixed $offset): bool
     {
         return isset($this->responses[$offset]);
     }
@@ -140,7 +140,7 @@ class FacebookBatchResponse extends FacebookResponse implements IteratorAggregat
     /**
      * @inheritdoc
      */
-    public function offsetUnset($offset)
+    public function offsetUnset(mixed $offset): void
     {
         unset($this->responses[$offset]);
     }
@@ -148,7 +148,7 @@ class FacebookBatchResponse extends FacebookResponse implements IteratorAggregat
     /**
      * @inheritdoc
      */
-    public function offsetGet($offset)
+    public function offsetGet(mixed $offset): mixed
     {
         return isset($this->responses[$offset]) ? $this->responses[$offset] : null;
     }
