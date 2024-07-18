@@ -113,16 +113,20 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate
 
     /**
      * Get all of the items in the collection.
+     *
+     * @return array
      */
-    public function all(): array
+    public function all()
     {
         return $this->items;
     }
 
     /**
      * Get the collection of items as a plain array.
+     *
+     * @return array
      */
-    public function asArray(): array
+    public function asArray()
     {
         return array_map(function ($value) {
             return $value instanceof Collection ? $value->asArray() : $value;
@@ -131,16 +135,24 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate
 
     /**
      * Run a map over each of the items.
+     *
+     * @param \Closure $callback
+     *
+     * @return static
      */
-    public function map(\Closure $callback): static
+    public function map(\Closure $callback)
     {
         return new static(array_map($callback, $this->items, array_keys($this->items)));
     }
 
     /**
      * Get the collection of items as JSON.
+     *
+     * @param int $options
+     *
+     * @return string
      */
-    public function asJson(int $options = 0): string
+    public function asJson($options = 0)
     {
         return json_encode($this->asArray(), $options);
     }
