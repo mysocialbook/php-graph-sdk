@@ -113,20 +113,16 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate
 
     /**
      * Get all of the items in the collection.
-     *
-     * @return array
      */
-    public function all()
+    public function all(): array
     {
         return $this->items;
     }
 
     /**
      * Get the collection of items as a plain array.
-     *
-     * @return array
      */
-    public function asArray()
+    public function asArray(): array
     {
         return array_map(function ($value) {
             return $value instanceof Collection ? $value->asArray() : $value;
@@ -135,24 +131,16 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate
 
     /**
      * Run a map over each of the items.
-     *
-     * @param \Closure $callback
-     *
-     * @return static
      */
-    public function map(\Closure $callback)
+    public function map(\Closure $callback): static
     {
         return new static(array_map($callback, $this->items, array_keys($this->items)));
     }
 
     /**
      * Get the collection of items as JSON.
-     *
-     * @param int $options
-     *
-     * @return string
      */
-    public function asJson($options = 0)
+    public function asJson(int $options = 0): string
     {
         return json_encode($this->asArray(), $options);
     }
@@ -191,18 +179,13 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate
 
     /**
      * Set the item at a given offset.
-     *
-     * @param mixed $key
-     * @param mixed $value
-     *
-     * @return void
      */
-    public function offsetSet($key, $value)
+    public function offsetSet(mixed $offset, mixed $value): void
     {
-        if (is_null($key)) {
+        if (is_null($offset)) {
             $this->items[] = $value;
         } else {
-            $this->items[$key] = $value;
+            $this->items[$offset] = $value;
         }
     }
 
