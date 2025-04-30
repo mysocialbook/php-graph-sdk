@@ -133,6 +133,7 @@ class Facebook
             'persistent_data_handler' => null,
             'pseudo_random_string_generator' => null,
             'url_detection_handler' => null,
+            'clientFqn' => FacebookClient::class,
         ], $config);
 
         if (!$config['app_id']) {
@@ -143,7 +144,7 @@ class Facebook
         }
 
         $this->app = new FacebookApp($config['app_id'], $config['app_secret']);
-        $this->client = new FacebookClient(
+        $this->client = new $config['clientFqn'](
             HttpClientsFactory::createHttpClient($config['http_client_handler']),
             $config['enable_beta_mode']
         );
